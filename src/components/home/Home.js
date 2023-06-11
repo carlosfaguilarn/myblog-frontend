@@ -1,9 +1,11 @@
+import { useEffect, useState } from 'react';
 import { Grid, Container } from '@mui/material';
 import AppToolbar from './AppToolbar';
 import Footer from './Footer';
 import Search from './Search';
 import Header from './Header';
 import EntryCard from './EntryCard';
+import { getAll } from '../../Services/Entry/Entry';
 
 const headerInfo = {
     title: '¡Hola, bienvenido a mi blog personal!',
@@ -11,7 +13,7 @@ const headerInfo = {
     image: '/background.webp', 
 };
   
-const entries = [
+/* const entries = [
     {
       title: 'Ejemplo de entrada 1',
       author: 'William Lane Craig',
@@ -25,11 +27,20 @@ const entries = [
       publicationDate: 'Enero 2023',
       contentText: 'Este es el contenido de la entrada 2',
       image: 'https://source.unsplash.com/random?wallpapers',
-    },
-];
+    }, 
+];*/
   
-
 export default function Home(){
+    const [entries, setEntries] = useState([]);
+
+    useEffect(() => {
+        getAll().then((result) => {
+            if(result){
+                setEntries(result);
+            }
+        });
+    }, []); 
+
     return (
         <Grid>
             <Container maxWidth="lg">
