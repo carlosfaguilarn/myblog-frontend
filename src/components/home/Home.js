@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Grid, Container } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+
 import AppToolbar from './AppToolbar';
 import Footer from './Footer';
 import Search from './Search';
 import Header from './Header';
 import EntryCard from './EntryCard';
 import { getAll } from '../../Services/Entry/Entry';
+import { IndeterminateCheckBoxOutlined } from '@mui/icons-material';
 
 const headerInfo = {
     title: '¡Hola, bienvenido a mi blog personal!',
@@ -30,8 +33,9 @@ const headerInfo = {
     }, 
 ];*/
   
-export default function Home(){
+export default function Home(navigation){
     const [entries, setEntries] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         getAll().then((result) => {
@@ -41,6 +45,10 @@ export default function Home(){
         });
     }, []); 
 
+    const handleClickCard = index => {
+       navigate(`/entry/1`);
+    }
+
     return (
         <Grid sx={{ backgroundColor: '#EBEEF3 !important'}}>
             <Container maxWidth="lg" sx={{ marginBottom: 20 }}>
@@ -49,10 +57,14 @@ export default function Home(){
                     <Header post={headerInfo} />
                     <Search />
                     <Grid sx={{ marginTop: 0 }} container spacing={4}>
-                        {entries.map((post) => (
-                            <EntryCard key={post.title} post={post} />
+                        {entries.map((entry) => (
+                            <EntryCard 
+                                key={entry.title} 
+                                post={entry} 
+                                onClick={handleClickCard}
+                            />
                         ))}
-                    </Grid>  
+                    </Grid>
                 </main>
             </Container>
             <Footer description="Carlos Francisco Aguilar Navarrete" />

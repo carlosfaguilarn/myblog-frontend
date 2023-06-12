@@ -13,7 +13,8 @@ function Header(props) {
       sx={{
         position: 'relative',
         color: '#fff',
-        mb: 4,
+        mb: 5,
+        paddingTop: 25,
         fontWeight: 'bold',
         backgroundColor: 'grey.800',
         backgroundSize: 'cover',

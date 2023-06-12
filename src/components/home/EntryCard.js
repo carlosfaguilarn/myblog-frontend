@@ -4,10 +4,10 @@ import Typography from '@mui/material/Typography';
 import { Grid, Card, CardActionArea, CardContent, CardMedia } from '@mui/material';
 
 function EntryCard(props) {
-  const { post } = props;
+  const { post, onClick } = props;
 
   return (
-    <Grid item xs={12} md={12}>
+    <Grid item xs={12} md={12} onClick={onClick}>
       <CardActionArea component="a" href="#">
         <Card sx={{ display: 'flex' }}>
           <CardContent sx={{ flex: 1 }}>
@@ -31,7 +31,6 @@ function EntryCard(props) {
                   : post.contentText 
               } 
             </Typography> 
-
 
             <Grid sx={{ display: 'flex', justifyContent: 'center' }}>
               <Typography variant="subtitle1" color="primary">
