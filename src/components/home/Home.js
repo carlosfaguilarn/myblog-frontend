@@ -42,13 +42,13 @@ export default function Home(){
     }, []); 
 
     return (
-        <Grid>
-            <Container maxWidth="lg">
+        <Grid sx={{ backgroundColor: '#EBEEF3 !important'}}>
+            <Container maxWidth="lg" sx={{ marginBottom: 20 }}>
                 <AppToolbar title="My Blog" sections={[]} />
                 <main>
                     <Header post={headerInfo} />
                     <Search />
-                    <Grid sx={{ marginTop: 1 }} container spacing={4}>
+                    <Grid sx={{ marginTop: 0 }} container spacing={4}>
                         {entries.map((post) => (
                             <EntryCard key={post.title} post={post} />
                         ))}

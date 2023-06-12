@@ -19,11 +19,11 @@ function Header(props) {
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
-        backgroundImage: `url(${post.image})`,
+        backgroundImage: `url(${post.image || ""})`,
       }}
     >
       {/* Increase the priority of the hero background image */}
-      {<img style={{ display: 'none' }} src={post.image} alt={post.imageText} />}
+      {<img style={{ display: 'none' }} src={post.image || ""} alt={post.imageText || ""} />}
       <Box
         sx={{
           position: 'absolute',
@@ -44,10 +44,10 @@ function Header(props) {
             }}
           >         
             <Typography style={{backgroundColor: '#41475bba'}} component="h1" variant="h3" color="inherit" gutterBottom>
-              {post.title}
+              {post.title || ""}
             </Typography>
             <Typography variant="h5" color="inherit" paragraph>
-              {post.description}
+              {post.description || ""}
             </Typography> 
           </Box>
         </Grid>
