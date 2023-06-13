@@ -58,11 +58,8 @@ function Header(props) {
 }
 
 Header.propTypes = {
-  post: PropTypes.shape({
-    description: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    imageText: PropTypes.string.isRequired,
-    linkText: PropTypes.string.isRequired,
+  post: PropTypes.shape({ 
+    image: PropTypes.string.isRequired, 
     title: PropTypes.string.isRequired,
   }).isRequired,
 };

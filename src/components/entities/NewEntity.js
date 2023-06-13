@@ -20,7 +20,7 @@ function NewEntry(props){
   const { open, handleClose } = props;
   const [ entry, setEntry ] = useState({});
   const [ isDialogResultOpen, setIsDialogResultOpen ] = useState(false);
-  var newEntryResult = "";
+  const [ newEntryResult, setNewEntryResult ] = useState("");
 
   const handleClickOpenDialog = () => {
     setIsDialogResultOpen(true);
@@ -38,13 +38,26 @@ function NewEntry(props){
   } 
   
   const handleClickPublicar = e => { 
+    var validationResult = "";//
+
+    if(entry.title === "" || entry.title === undefined) validationResult = "¡Te falta capturar el título!"; 
+    else if(entry.author === "" || entry.author === undefined) validationResult = "¡Te falta capturar el autor!"; 
+    else if(entry.contentText === "" || entry.contentText === undefined) validationResult = "¡Te falta escribir el contenido!";
+    
+    if(validationResult !== ""){
+      setIsDialogResultOpen(true);
+      setNewEntryResult(validationResult);
+      return;
+    }
+
     entry.publicationDate = new Date();
     save(entry).then((result) => {
       if(result){
-        newEntryResult = "¡Entrada publicada correctamente!";
+        validationResult = "¡Entrada publicada correctamente!";
       }else{
-        newEntryResult = "Ocurrió un error al publicar la entrada";
+        validationResult = "Ocurrió un error al publicar la entrada";
       }
+      setNewEntryResult(validationResult);
       setEntry({});
       setIsDialogResultOpen(true);
     });

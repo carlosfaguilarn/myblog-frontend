@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { InputBase, Grid, Typography, Divider, IconButton, Toolbar, Button } from '@mui/material';
+import { InputBase, Grid, Typography, Divider, IconButton, Toolbar, Button, TextField, Input } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
 import NewEntry from '../entities/NewEntity';
 
-export default function Search() {
+export default function Search(props) {
+  const { value, onClickSearch, onChangeQuery, onlineState } = props;
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -13,7 +14,6 @@ export default function Search() {
   const handleClose = () => {
     setOpen(false);
   };
-
 
   return (
     <React.Fragment>
@@ -35,17 +35,24 @@ export default function Search() {
         </Grid>   
 
         <Grid sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }} > 
-          <InputBase
+          <Input
+            value={value}
+            onChange={onChangeQuery}
             sx={{ ml: 1, flex: 1 }}
             placeholder="Buscar..."
-            inputProps={{ 'aria-label': 'search google maps' }}
+            disableUnderline={true} 
           />
-          <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
-            <SearchIcon />
+          <IconButton onClick={onClickSearch}  type="button" sx={{ p: '10px' }} aria-label="search">
+            <SearchIcon/>
           </IconButton>
           <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
           <Button 
-            sx={{ color: '#68696B' }} 
+            disabled = {!onlineState}
+            variant="contained"
+            sx={{  
+              marginLeft: 2,
+              color: '#FFFFFF' 
+            }} 
             onClick={handleClickOpen}
             startIcon={<AddIcon />}>
             Nueva entrada
