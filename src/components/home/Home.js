@@ -7,32 +7,14 @@ import Footer from './Footer';
 import Search from './Search';
 import Header from './Header';
 import EntryCard from './EntryCard';
-import { getAll } from '../../Services/Entry/Entry';
-import { IndeterminateCheckBoxOutlined } from '@mui/icons-material';
+import { getAll } from '../../Services/Entry/Entry'; 
 
 const headerInfo = {
     title: '¡Hola, bienvenido a mi blog personal!',
     description: "Aquí encontrarás las mejores notas sobre software, tecnología, y diferentes temas",
     image: '/background.webp', 
 };
-  
-/* const entries = [
-    {
-      title: 'Ejemplo de entrada 1',
-      author: 'William Lane Craig',
-      publicationDate: 'Noviembre 2022',
-      contentText:'Este es el contenido de la entrada 1',
-      image: 'https://source.unsplash.com/random?wallpapers',
-    },
-    {
-      author: 'Carlos Francisco Aguilar Navarrete',
-      title: 'Ejemplo de entrada 2',
-      publicationDate: 'Enero 2023',
-      contentText: 'Este es el contenido de la entrada 2',
-      image: 'https://source.unsplash.com/random?wallpapers',
-    }, 
-];*/
-  
+   
 export default function Home(navigation){
     const [query, setQuery] = useState("");
     const [onlineState, setOnlineState] = useState(true);

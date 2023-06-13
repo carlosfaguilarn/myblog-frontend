@@ -16,26 +16,47 @@ import { getOne } from '../../Services/Entry/Entry';
 
 export default function EntryDetail(props){
     const [ entry, setEntry ] = useState({});
+    const [onlineState, setOnlineState] = useState(true);
     const [ headerInfo, setHeaderInfo ] = useState({});
     const { id } = useParams();
 
     useEffect(() => {
-        getOne(id).then((result) =>{
-            if(result){
-                setEntry(result);
-                setHeaderInfo({
-                    title: result.title,
-                    description: '',
-                    image: result.image, 
-                });
-            }
-        });
+        getOne(id).then(
+            (result) =>{
+                if(result){
+                    setEntry(result);
+                    setHeaderInfo({
+                        title: result.title,
+                        description: '',
+                        image: result.image, 
+                    });
+                }
+            },
+            (reason) => {
+                setOnlineState(false);
+
+                // get data from local storage
+                const items = JSON.parse(localStorage.getItem('entries'));                
+                if (items && items.length > 0) {
+                    const entry = items.find(entry => {
+                        return entry.id === parseInt(id);
+                    });
+
+                    setEntry(entry);
+                    setHeaderInfo({
+                        title: entry.title,
+                        description: '',
+                        image: entry.image, 
+                    });
+                }
+            },
+        );
     }, []); 
 
     return (
         <Grid sx={{ backgroundColor: '#EBEEF3 !important'}}>
             <Container maxWidth="lg" sx={{ marginBottom: 20 }}>
-                <AppToolbar title="My Blog" sections={[]} />
+                <AppToolbar onlineState={onlineState}  title="My Blog" sections={[]} />
                 <Header post={headerInfo} />
                 <Grid sx={{ marginTop: 10, marginRight: 20, marginLeft: 20 }} container spacing={4}>
                     <Grid container sx={{ display: 'flex', justifyContent: 'space-between' }}>

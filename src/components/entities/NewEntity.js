@@ -21,14 +21,10 @@ function NewEntry(props){
   const [ entry, setEntry ] = useState({});
   const [ isDialogResultOpen, setIsDialogResultOpen ] = useState(false);
   const [ newEntryResult, setNewEntryResult ] = useState("");
-
-  const handleClickOpenDialog = () => {
-    setIsDialogResultOpen(true);
-  };
+ 
   const handleCloseDialog = () => {
     setIsDialogResultOpen(false);
   };
-
 
   const handleChangeEntry = e =>{ 
     setEntry({
@@ -38,7 +34,7 @@ function NewEntry(props){
   } 
   
   const handleClickPublicar = e => { 
-    var validationResult = "";//
+    var validationResult = ""; 
 
     if(entry.title === "" || entry.title === undefined) validationResult = "¡Te falta capturar el título!"; 
     else if(entry.author === "" || entry.author === undefined) validationResult = "¡Te falta capturar el autor!"; 
