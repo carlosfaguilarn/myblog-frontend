@@ -7,8 +7,7 @@ const HomeStyles = () => (
       marginBottom: 20,
       paddingBottom: '50px'
     },
-    entryContainer: {
-      height: '200px',
+    entryContainer: { 
       marginTop: '30px',
       marginBottom: '30px', 
     }

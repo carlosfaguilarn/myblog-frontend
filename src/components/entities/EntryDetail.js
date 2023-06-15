@@ -9,12 +9,6 @@ import Footer from '../home/Footer';
 import AppToolbar from '../home/AppToolbar';
 import { getOne } from '../../Services/Entry/Entry';
 import EntryDetailStyles from '../../assets/css/EntryDetailStyles';
-   
-/* const headerInfo = {
-    title: '¡Hola, bienvenido a mi blog personal!',
-    description: "Aquí encontrarás las mejores notas sobre software, tecnología, y diferentes temas",
-    image: '/background.webp', 
-}; */
 
 function EntryDetail(props){
     const { classes } = props;
@@ -62,7 +56,7 @@ function EntryDetail(props){
             <Container maxWidth="lg" className={classes.container}>
                 <AppToolbar onlineState={onlineState}  title="My Blog" sections={[]} />
                 <Header post={headerInfo} />
-                <Grid /* sx={{ marginTop: 10, marginRight: 20, marginLeft: 20 }} */>
+                <Grid>
                     <Grid container sx={{ display: 'flex', justifyContent: 'space-between' }}>
                         <Typography component="h2" variant="h5">
                             {entry.title || ""}

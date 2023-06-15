@@ -90,15 +90,17 @@ function Home(props){
                             : "Aún no hay entradas publicadas"
                         }
                     />
-                    <Grid container spacing={4} className={classes.entryContainer}>
+                    <Grid container className={classes.entryContainer}>
                         {entries.map((entry) => (
-                            <EntryCard 
-                                key={entry.title} 
-                                post={entry} 
-                                onClick={
-                                    () => handleClickCard(entry.id)
-                                }
-                            />
+                            <Grid item xs={12} sx={{marginBottom: 1}}>
+                                <EntryCard 
+                                    key={entry.title} 
+                                    post={entry} 
+                                    onClick={
+                                        () => handleClickCard(entry.id)
+                                    }
+                                />
+                            </Grid>
                         ))}
                     </Grid>
                 </main>
