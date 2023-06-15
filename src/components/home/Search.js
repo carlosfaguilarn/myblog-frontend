@@ -1,11 +1,15 @@
 import * as React from 'react';
-import { InputBase, Grid, Typography, Divider, IconButton, Toolbar, Button, TextField, Input } from '@mui/material';
+import { withStyles } from '@material-ui/core/styles';
+import { Grid, Typography, Divider, IconButton, Toolbar, Button, Input } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
 import NewEntry from '../entities/NewEntity';
 
-export default function Search(props) {
-  const { value, onClickSearch, onChangeQuery, onlineState } = props;
+import SearchStyles from '../../assets/css/SearchStyles';
+
+function Search(props) {
+  const { classes } = props;
+  const { value, onClickSearch, onChangeQuery, onlineState, subtitle } = props;
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -17,7 +21,7 @@ export default function Search(props) {
 
   return (
     <React.Fragment>
-      <Toolbar sx={{ borderBottom: 1, borderColor: 'divider', justifyContent: 'space-between'}}>
+      <Toolbar className={classes.toolbar}>
         <Grid sx={{ mt: 3 }}>
             <Typography
                 component="h5"
@@ -30,11 +34,11 @@ export default function Search(props) {
                     fontSize: '1rem',
                 }}
                 >
-                Tal vez te interese leer:
+                  {subtitle}                
             </Typography>
         </Grid>   
 
-        <Grid sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }} > 
+        <Grid className={classes.gridButtons} > 
           <Input
             value={value}
             onChange={onChangeQuery}
@@ -66,3 +70,5 @@ export default function Search(props) {
     </React.Fragment>    
   );
 }
+
+export default withStyles(SearchStyles)(Search);

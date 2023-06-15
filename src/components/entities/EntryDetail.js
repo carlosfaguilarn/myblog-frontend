@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import { Grid, Container } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { useParams } from "react-router-dom";
@@ -7,6 +8,7 @@ import Header from '../home/Header';
 import Footer from '../home/Footer';
 import AppToolbar from '../home/AppToolbar';
 import { getOne } from '../../Services/Entry/Entry';
+import EntryDetailStyles from '../../assets/css/EntryDetailStyles';
    
 /* const headerInfo = {
     title: '¡Hola, bienvenido a mi blog personal!',
@@ -14,7 +16,8 @@ import { getOne } from '../../Services/Entry/Entry';
     image: '/background.webp', 
 }; */
 
-export default function EntryDetail(props){
+function EntryDetail(props){
+    const { classes } = props;
     const [ entry, setEntry ] = useState({});
     const [onlineState, setOnlineState] = useState(true);
     const [ headerInfo, setHeaderInfo ] = useState({});
@@ -30,6 +33,7 @@ export default function EntryDetail(props){
                         description: '',
                         image: result.image, 
                     });
+                    setOnlineState(false);
                 }
             },
             (reason) => {
@@ -55,10 +59,10 @@ export default function EntryDetail(props){
 
     return (
         <Grid sx={{ backgroundColor: '#EBEEF3 !important'}}>
-            <Container maxWidth="lg" sx={{ marginBottom: 20 }}>
+            <Container maxWidth="lg" className={classes.container}>
                 <AppToolbar onlineState={onlineState}  title="My Blog" sections={[]} />
                 <Header post={headerInfo} />
-                <Grid sx={{ marginTop: 10, marginRight: 20, marginLeft: 20 }} container spacing={4}>
+                <Grid /* sx={{ marginTop: 10, marginRight: 20, marginLeft: 20 }} */>
                     <Grid container sx={{ display: 'flex', justifyContent: 'space-between' }}>
                         <Typography component="h2" variant="h5">
                             {entry.title || ""}
@@ -84,3 +88,5 @@ export default function EntryDetail(props){
         </Grid>
     );
 } 
+
+export default withStyles(EntryDetailStyles)(EntryDetail);

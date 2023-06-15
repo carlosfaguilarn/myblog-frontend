@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import { Grid, Container } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,6 +9,7 @@ import Search from './Search';
 import Header from './Header';
 import EntryCard from './EntryCard';
 import { getAll } from '../../Services/Entry/Entry'; 
+import HomeStyles from '../../assets/css/HomeStyles';
 
 const headerInfo = {
     title: '¡Hola, bienvenido a mi blog personal!',
@@ -15,7 +17,8 @@ const headerInfo = {
     image: '/background.webp', 
 };
    
-export default function Home(navigation){
+function Home(props){
+    const { classes } = props;
     const [query, setQuery] = useState("");
     const [onlineState, setOnlineState] = useState(true);
     const [entries, setEntries] = useState([]);
@@ -31,6 +34,7 @@ export default function Home(navigation){
                 if(result){
                     setEntries(result);
                     setEntriesAll(result);
+                    setOnlineState(true);
 
                     //save data in local storage  
                     localStorage.setItem('entries', JSON.stringify(result));
@@ -70,8 +74,8 @@ export default function Home(navigation){
     };
 
     return (
-        <Grid sx={{ backgroundColor: '#EBEEF3 !important'}}>
-            <Container maxWidth="lg" sx={{ marginBottom: 20 }}>
+        <Grid className={classes.background}>
+            <Container maxWidth="lg" sx={classes.container}>
                 <AppToolbar onlineState={onlineState} title="My Blog" sections={[]} />
                 <main>
                     <Header post={headerInfo} />
@@ -80,8 +84,13 @@ export default function Home(navigation){
                         onChangeQuery={handleChangeQuerySearch}
                         onClickSearch={handleClickSearch}
                         onlineState={onlineState} 
+                        subtitle={
+                            entries.length > 0
+                            ? "Tal vez te interese leer:"
+                            : "Aún no hay entradas publicadas"
+                        }
                     />
-                    <Grid sx={{ marginTop: 0 }} container spacing={4}>
+                    <Grid container spacing={4} className={classes.entryContainer}>
                         {entries.map((entry) => (
                             <EntryCard 
                                 key={entry.title} 
@@ -98,3 +107,5 @@ export default function Home(navigation){
         </Grid>
     );
 }
+
+export default withStyles(HomeStyles)(Home);
